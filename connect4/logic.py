@@ -15,10 +15,15 @@ def check_winner_straight(pieces,wlength=4):
             if all(pieces[i][j:j+wlength]): return True
     return False
 
-
-
 def check_winner_diagonal(pieces,wlength=4):
-    pass
+    for i in range(len(pieces) - wlength + 1):
+        for j in range(len(pieces[0]) - wlength + 1):
+            if all(pieces[i + x][j + x] for x in range(wlength)):
+                return True
+        for j in range(wlength - 1, len(pieces[0])):
+            if all(pieces[i + x][j - x] for x in range(wlength)):
+                return True
+    return False
 
 def get_valid_actions(pieces):
     return pieces[0] == 0
@@ -29,6 +34,4 @@ def get_winstate(pieces):
         player_pieces = pieces == player
         if check_winner_straight(player_pieces) or check_winner_straight(player_pieces.transpose()) or check_winner_diagonal(player_pieces):
             return (True,player) 
-        
-
     return (False,1)
