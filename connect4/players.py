@@ -9,5 +9,5 @@ class RandomPlayer():
         pass
 
     def decision(self, board, valid_actions):
-        valid_moves = [i for i, x in enumerate(valid_actions) if x]
-        return np.random.choice(valid_moves)        
+        valid_moves = [i for i, x in enumerate(valid_actions)) if x]
+        return np.random.choice(valid_actions)        

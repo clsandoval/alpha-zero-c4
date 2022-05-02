@@ -27,6 +27,7 @@ class Connect4():
         return self.board.pieces[::-1]
 
     def get_valid_actions(self):
+        #valid_moves = [i for i, x in enumerate(gva(self.board.pieces)) if x]
         return gva(self.board.pieces)
         
     def get_winstate(self):

@@ -63,16 +63,19 @@ class nnet():
         self.filters = filters
         self.layers = layers
     
-    def pi(self,board):
-        b = np.expand_dims(board,1)
-        p = self.net.predict(b)[0]
-        return p
+    def expand(self,board):
+        b = np.expand_dims(board,0)
+        p, v = self.net.predict(b)
+        return p,v
 
-    def value(self,board):
-        b = np.expand_dims(board,1)
-        v = self.net.predict(b)[1]
-        return v
+    def train(self,examples):
+        examples_boards = [i[0] for i in examples]
+        examples_pi = [i[1] for i in examples]
+        examples_v = [i[2] for i in examples]
+        self.net.fit(x = examples_boards,y = [examples_pi,examples_v],batch_size=64, epochs = 10)
 
 
 # %%
+
+
 # %%

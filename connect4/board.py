@@ -23,7 +23,7 @@ class board():
         if row == -1:
             raise ValueError("no valid move at {} {}".format(row,column))
         self.pieces[row][column] = player
-        return self.pieces
+        self.pieces *=-1
     
     def __str__(self):
         return str(self.pieces)
