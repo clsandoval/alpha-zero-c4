@@ -25,7 +25,7 @@ class residual_block(keras.layers.Layer):
 
 
 def create_c4_model(board_shape, filters, residual_layers, kernel_size, action_size):
-    board_input = keras.Input(shape=board_shape)
+    board_input = layers.Input(shape=board_shape)
     board_input = layers.Reshape((board_shape[0],board_shape[1],1))(board_input)
     conv1 = layers.Conv2D(filters,kernel_size,padding = "same")(board_input)
     relu1 = layers.ReLU()(conv1)
@@ -38,13 +38,15 @@ def create_c4_model(board_shape, filters, residual_layers, kernel_size, action_s
     pi_conv1 = layers.Conv2D(2,(1,1))(x)
     pi_bn1 = layers.BatchNormalization()(pi_conv1)
     pi_relu1 = layers.ReLU()(pi_bn1)
-    pi = layers.Dense(action_size,activation="softmax",name="pi")(pi_relu1)
+    pi_flat = layers.Flatten()(pi_relu1)
+    pi = layers.Dense(action_size,activation="softmax",name="pi")(pi_flat)
 
     #Value network
     v_conv1 = layers.Conv2D(1,(1,1))(x)
     v_bn1 = layers.BatchNormalization()(v_conv1)
     v_relu1 = layers.ReLU()(v_bn1)
-    v_hidden = layers.Dense(256,activation="relu")(v_relu1)
+    v_flat = layers.Flatten()(v_relu1)
+    v_hidden = layers.Dense(256,activation="relu")(v_flat)
     v = layers.Dense(1,activation="tanh",name="v")(v_hidden)
 
     model = keras.Model(inputs = board_input,outputs = [pi,v])
@@ -62,20 +64,15 @@ class nnet():
         self.layers = layers
     
     def pi(self,board):
-        
-        pass
+        b = np.expand_dims(board,1)
+        p = self.net.predict(b)[0]
+        return p
 
     def value(self,board):
-        pass
-# %%
+        b = np.expand_dims(board,1)
+        v = self.net.predict(b)[1]
+        return v
 
 
-c4net = nnet(board_shape=(5,5), residual_layers=6,filters=256,kernel_size=3)
 # %%
-
-# %%
-x = np.ones((1,5,5))
-z = c4net.net.predict(x)
-# %%
-
 # %%
