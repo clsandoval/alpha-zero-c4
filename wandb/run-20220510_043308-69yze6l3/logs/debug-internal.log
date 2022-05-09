@@ -1,0 +1,6 @@
+2022-05-10 04:33:09,497 INFO    MainThread:11708 [internal.py:wandb_internal():87] W&B internal server running at pid: 11708, started at: 2022-05-10 04:33:09.497907
+2022-05-10 04:33:09,499 INFO    WriterThread:11708 [datastore.py:open_for_write():77] open: C:\Users\carlos\Desktop\cs\alpha-zero-c4\wandb\run-20220510_043308-69yze6l3\run-69yze6l3.wandb
+2022-05-10 04:33:09,500 DEBUG   HandlerThread:11708 [handler.py:handle_request():130] handle_request: check_version
+2022-05-10 04:33:09,503 DEBUG   SenderThread:11708 [sender.py:send():234] send: header
+2022-05-10 04:33:09,503 DEBUG   SenderThread:11708 [sender.py:send_request():248] send_request: check_version
+2022-05-10 04:33:09,551 DEBUG   SenderThread:11708 [sender.py:send():234] send: run

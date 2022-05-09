@@ -1,5 +1,4 @@
 #%%
-from re import L
 import numpy as np
 import math
 from network.nnet import nnet
@@ -8,7 +7,7 @@ from connect4.game import Connect4
 
 class MCTS():
     
-    def __init__(self,game,nnet, num_sims = 500,cpuct = 1):
+    def __init__(self,game,nnet, num_sims = 50,cpuct = 1):
         self.num_sims = num_sims
         self.game = game
         self.nnet = nnet
@@ -20,6 +19,9 @@ class MCTS():
         self.cpuct = cpuct
 
     def get_probs(self, temp = 1):
+        """
+        Returns action probabilities of length (action_size)
+        """
         #Store original board config
         state = self.game.__str__()
         base_pieces = self.game.board.pieces.copy()
@@ -36,6 +38,9 @@ class MCTS():
         
 
     def search(self):
+        """ 
+        Execute one monte carlo tree search returning the value at the given state
+        """
         state = self.game.__str__()
 
         #Check if winner, return -1 if so
@@ -84,11 +89,7 @@ class MCTS():
         self.N[state] += 1
         return -value
     
-                         
-
-c4 = Connect4(5,5,4)
-mcts = MCTS(c4,nnet((5,5),6,128,3),cpuct=1)
-mcts.get_probs()
+                    
 # %%
 
 # %%

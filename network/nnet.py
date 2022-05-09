@@ -3,6 +3,10 @@ import tensorflow as tf
 import tensorflow.keras as keras
 import tensorflow.keras.layers as layers
 import numpy as np
+import wandb
+from wandb.keras import WandbCallback
+
+
 #%%
 class residual_block(keras.layers.Layer):
 
@@ -56,12 +60,14 @@ def create_c4_model(board_shape, filters, residual_layers, kernel_size, action_s
 
 class nnet():
 
-    def __init__(self, board_shape, residual_layers, filters,kernel_size):
-        self.net = create_c4_model(board_shape,filters,residual_layers,kernel_size,board_shape[0])
+    def __init__(self, board_shape, residual_layers, filters,kernel_size, name = "current_model"):
+        print(board_shape)
+        self.net = create_c4_model(board_shape,filters,residual_layers,kernel_size,board_shape[1])
         self.board_shape =board_shape
-        self.action_size = board_shape[0]
+        self.action_size = board_shape[1]
         self.filters = filters
         self.layers = layers
+        self.name=name
     
     def expand(self,board):
         b = np.expand_dims(board,0)
@@ -69,11 +75,18 @@ class nnet():
         return p[0],v[0][0]
 
     def train(self,examples):
-        examples_boards = [i[0] for i in examples]
-        examples_pi = [i[1] for i in examples]
-        examples_v = [i[2] for i in examples]
-        self.net.fit(x = examples_boards,y = [examples_pi,examples_v],batch_size=64, epochs = 10)
+        examples_boards = np.array([i[0] for i in examples])
+        examples_pi = np.array([i[1] for i in examples])
+        examples_v = np.array([i[2] for i in examples])
+        self.net.fit(x = examples_boards,y = [examples_pi,examples_v],batch_size=64, epochs = 10,callbacks=WandbCallback())
 
+    def save_checkpoint(self):
+        tf.keras.models.save_model(self.net,"models/{}".format(self.name))
+    
+
+    def load_checkpoint(self):
+        return tf.keras.models.load_model("models/{}".format(self.name))
+        
 
 # %%
 
