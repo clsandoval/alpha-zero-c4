@@ -1,7 +1,9 @@
 #%%
 import numpy as np
 import random
+import time
 import os
+import wandb
 from tqdm import tqdm
 from mcts import MCTS
 from network.nnet import nnet
@@ -47,8 +49,11 @@ class Coach():
         for it in (range(self.iterations)):
             print("Starting Iteration")
             for i in (range(self.num_eps)):
+                start = time.perf_counter()
                 result = self.episode()
                 self.examples = self.examples + result
+                ep_time = time.perf_counter()-start
+                wandb.log({'episode_time': ep_time})
             if len(self.examples) > 100000:
                 self.examples = self.examples[:100000]
             random.shuffle(self.examples)

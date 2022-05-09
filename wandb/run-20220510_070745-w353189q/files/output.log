@@ -1,0 +1,38 @@
+(6, 7)
+Starting Iteration
+Traceback (most recent call last):
+  File "train.py", line 9, in <module>
+    coach.train()
+  File "C:\Users\carlos\Desktop\cs\alpha-zero-c4\coach.py", line 53, in train
+    result = self.episode()
+  File "C:\Users\carlos\Desktop\cs\alpha-zero-c4\coach.py", line 35, in episode
+    probs = self.mcts.get_probs()
+  File "C:\Users\carlos\Desktop\cs\alpha-zero-c4\mcts.py", line 29, in get_probs
+    self.search()
+  File "C:\Users\carlos\Desktop\cs\alpha-zero-c4\mcts.py", line 81, in search
+    value = self.search()
+  File "C:\Users\carlos\Desktop\cs\alpha-zero-c4\mcts.py", line 81, in search
+    value = self.search()
+  File "C:\Users\carlos\Desktop\cs\alpha-zero-c4\mcts.py", line 60, in search
+    pi, value = self.nnet.expand(self.game.board.pieces)
+  File "C:\Users\carlos\Desktop\cs\alpha-zero-c4\network\nnet.py", line 74, in expand
+    p, v = self.net.predict(b)
+  File "C:\Users\carlos\AppData\Local\Programs\Python\Python38\lib\site-packages\keras\utils\traceback_utils.py", line 64, in error_handler
+    return fn(*args, **kwargs)
+  File "C:\Users\carlos\AppData\Local\Programs\Python\Python38\lib\site-packages\keras\engine\training.py", line 1789, in predict
+    tmp_batch_outputs = self.predict_function(iterator)
+  File "C:\Users\carlos\AppData\Local\Programs\Python\Python38\lib\site-packages\tensorflow\python\util\traceback_utils.py", line 150, in error_handler
+    return fn(*args, **kwargs)
+  File "C:\Users\carlos\AppData\Local\Programs\Python\Python38\lib\site-packages\tensorflow\python\eager\def_function.py", line 910, in __call__
+    result = self._call(*args, **kwds)
+  File "C:\Users\carlos\AppData\Local\Programs\Python\Python38\lib\site-packages\tensorflow\python\eager\def_function.py", line 949, in _call
+    results = self._stateful_fn(*args, **kwds)
+  File "C:\Users\carlos\AppData\Local\Programs\Python\Python38\lib\site-packages\tensorflow\python\eager\function.py", line 3130, in __call__
+    return graph_function._call_flat(
+  File "C:\Users\carlos\AppData\Local\Programs\Python\Python38\lib\site-packages\tensorflow\python\eager\function.py", line 1959, in _call_flat
+    return self._build_call_outputs(self._inference_function.call(
+  File "C:\Users\carlos\AppData\Local\Programs\Python\Python38\lib\site-packages\tensorflow\python\eager\function.py", line 598, in call
+    outputs = execute.execute(
+  File "C:\Users\carlos\AppData\Local\Programs\Python\Python38\lib\site-packages\tensorflow\python\eager\execute.py", line 58, in quick_execute
+    tensors = pywrap_tfe.TFE_Py_Execute(ctx._handle, device_name, op_name,
+KeyboardInterrupt
