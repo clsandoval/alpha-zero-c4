@@ -42,9 +42,9 @@ class Arena():
                 player_ctr = (player_ctr + 1) %2
 
     def pit(self,verbose = False):
+        self.battle(verbose)
         if self.log:
             wandb.log({'Agent': self.wins[0], 'Random Agent': self.wins[1]})
-        self.battle(verbose)
         print("Candidate: {} Current: {}".format(self.wins[0],self.wins[1]))
         if self.wins[0]/(self.battles) > .55:
             return 0
