@@ -37,7 +37,10 @@ class Coach():
             action = np.random.choice(actions,p=probs)
             self.game.get_next_state(1,action)
             states.append(self.game.board.pieces)
+            states.append(np.fliplr(self.game.board.pieces))
             problist.append(probs)
+            problist.append(probs)
+            playerlist.append(player_ctr)
             playerlist.append(player_ctr)
             win, player = self.game.get_winstate()
             valid_actions = self.game.get_valid_actions()
@@ -54,8 +57,10 @@ class Coach():
                 self.examples = self.examples + result
                 ep_time = time.perf_counter()-start
                 wandb.log({'episode_time': ep_time})
+            wandb.log({'examples_in_mem':len(self.examples)})
             if len(self.examples) > 100000:
-                self.examples = self.examples[:100000]
+                excess = len(self.examples) - 100000
+                self.examples = self.examples[excess:]
             random.shuffle(self.examples)
             self.nnet.train(self.examples)
             current_network = self.nnet
@@ -66,8 +71,8 @@ class Coach():
 
             print("Comparing Networks")
             random_player = RandomPlayer()
-            current_player = NetworkPlayer(current_network)
-            best_player = NetworkPlayer(best_network)
+            current_player = NetworkPlayer(current_network,name="current network")
+            best_player = NetworkPlayer(best_network,name="best network")
             arena = Arena(best_player,current_player,self.board_shape[0],self.board_shape[1],self.win_length)
             res = arena.pit()
             if res: 

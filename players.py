@@ -6,8 +6,9 @@ from mcts import MCTS
 
 class NetworkPlayer():
     """Player utilizing an AlphaZero agent"""
-    def __init__(self,nnet):
+    def __init__(self,nnet,name="Network Agent"):
         self.nnet = nnet
+        self.name = name
     
     def init_game(self,game):
         self.game = game
@@ -21,7 +22,8 @@ class NetworkPlayer():
 class RandomPlayer():
     """ Random Agent for testing purposes and benchmarks"""
 
-    def __init__(self):
+    def __init__(self,name="Random Agent"):
+        self.name = name
         pass
 
     def init_game(self,game):
