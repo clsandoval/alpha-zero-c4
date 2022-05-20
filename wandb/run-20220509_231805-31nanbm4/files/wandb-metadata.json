@@ -1,0 +1,22 @@
+{
+    "os": "Linux-5.15.0-1004-aws-x86_64-with-glibc2.35",
+    "python": "3.10.4",
+    "heartbeatAt": "2022-05-09T23:18:08.494696",
+    "startedAt": "2022-05-09T23:18:05.950131",
+    "docker": null,
+    "cpu_count": 2,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/ubuntu/alpha-zero-c4/train.py",
+    "codePath": "train.py",
+    "git": {
+        "remote": "git@github.com:clsandoval/alpha-zero-c4.git",
+        "commit": "18792d90aad7c53373cc982821580f3090e0a4fe"
+    },
+    "email": null,
+    "root": "/home/ubuntu/alpha-zero-c4",
+    "host": "ip-172-31-26-198",
+    "username": "ubuntu",
+    "executable": "/usr/bin/python3"
+}

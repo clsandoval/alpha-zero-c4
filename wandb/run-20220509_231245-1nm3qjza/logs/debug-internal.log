@@ -1,0 +1,56 @@
+2022-05-09 23:12:46,443 INFO    MainThread:400182 [internal.py:wandb_internal():90] W&B internal server running at pid: 400182, started at: 2022-05-09 23:12:46.443729
+2022-05-09 23:12:46,447 DEBUG   SenderThread:400182 [sender.py:send():232] send: header
+2022-05-09 23:12:46,447 INFO    WriterThread:400182 [datastore.py:open_for_write():75] open: /home/ubuntu/alpha-zero-c4/wandb/run-20220509_231245-1nm3qjza/run-1nm3qjza.wandb
+2022-05-09 23:12:46,447 DEBUG   SenderThread:400182 [sender.py:send():232] send: run
+2022-05-09 23:12:46,784 DEBUG   HandlerThread:400182 [handler.py:handle_request():141] handle_request: check_version
+2022-05-09 23:12:46,789 INFO    SenderThread:400182 [dir_watcher.py:__init__():197] watching files in: /home/ubuntu/alpha-zero-c4/wandb/run-20220509_231245-1nm3qjza/files
+2022-05-09 23:12:46,789 INFO    SenderThread:400182 [sender.py:_start_run_threads():811] run started: 1nm3qjza with start time 1652137965
+2022-05-09 23:12:46,789 DEBUG   SenderThread:400182 [sender.py:send():232] send: summary
+2022-05-09 23:12:46,790 INFO    SenderThread:400182 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-09 23:12:46,790 DEBUG   SenderThread:400182 [sender.py:send_request():246] send_request: check_version
+2022-05-09 23:12:46,904 DEBUG   HandlerThread:400182 [handler.py:handle_request():141] handle_request: run_start
+2022-05-09 23:12:47,791 INFO    Thread-7  :400182 [dir_watcher.py:_on_file_created():244] file/dir created: /home/ubuntu/alpha-zero-c4/wandb/run-20220509_231245-1nm3qjza/files/wandb-summary.json
+2022-05-09 23:12:48,372 DEBUG   HandlerThread:400182 [meta.py:__init__():35] meta init
+2022-05-09 23:12:48,372 DEBUG   HandlerThread:400182 [meta.py:__init__():49] meta init done
+2022-05-09 23:12:48,372 DEBUG   HandlerThread:400182 [meta.py:probe():209] probe
+2022-05-09 23:12:48,373 DEBUG   HandlerThread:400182 [meta.py:_setup_git():199] setup git
+2022-05-09 23:12:48,380 DEBUG   HandlerThread:400182 [meta.py:_setup_git():206] setup git done
+2022-05-09 23:12:48,380 DEBUG   HandlerThread:400182 [meta.py:_save_pip():53] save pip
+2022-05-09 23:12:48,380 DEBUG   HandlerThread:400182 [meta.py:_save_pip():67] save pip done
+2022-05-09 23:12:48,380 DEBUG   HandlerThread:400182 [meta.py:probe():247] probe done
+2022-05-09 23:12:48,382 DEBUG   SenderThread:400182 [sender.py:send():232] send: files
+2022-05-09 23:12:48,382 INFO    SenderThread:400182 [sender.py:_save_file():948] saving file wandb-metadata.json with policy now
+2022-05-09 23:12:48,387 DEBUG   HandlerThread:400182 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-09 23:12:48,388 DEBUG   SenderThread:400182 [sender.py:send_request():246] send_request: stop_status
+2022-05-09 23:12:48,780 DEBUG   SenderThread:400182 [sender.py:send():232] send: telemetry
+2022-05-09 23:12:48,791 INFO    Thread-7  :400182 [dir_watcher.py:_on_file_created():244] file/dir created: /home/ubuntu/alpha-zero-c4/wandb/run-20220509_231245-1nm3qjza/files/output.log
+2022-05-09 23:12:48,791 INFO    Thread-7  :400182 [dir_watcher.py:_on_file_created():244] file/dir created: /home/ubuntu/alpha-zero-c4/wandb/run-20220509_231245-1nm3qjza/files/wandb-metadata.json
+2022-05-09 23:12:48,792 INFO    Thread-7  :400182 [dir_watcher.py:_on_file_created():244] file/dir created: /home/ubuntu/alpha-zero-c4/wandb/run-20220509_231245-1nm3qjza/files/requirements.txt
+2022-05-09 23:12:49,323 INFO    Thread-11 :400182 [upload_job.py:push():132] Uploaded file /tmp/tmpd1g2aeqiwandb/14ll2i78-wandb-metadata.json
+2022-05-09 23:12:50,790 INFO    Thread-7  :400182 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/ubuntu/alpha-zero-c4/wandb/run-20220509_231245-1nm3qjza/files/output.log
+2022-05-09 23:13:03,782 DEBUG   HandlerThread:400182 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-09 23:13:03,782 DEBUG   SenderThread:400182 [sender.py:send_request():246] send_request: stop_status
+2022-05-09 23:13:16,450 DEBUG   SenderThread:400182 [sender.py:send():232] send: stats
+2022-05-09 23:13:16,799 INFO    Thread-7  :400182 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/ubuntu/alpha-zero-c4/wandb/run-20220509_231245-1nm3qjza/files/config.yaml
+2022-05-09 23:13:19,078 DEBUG   HandlerThread:400182 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-09 23:13:19,079 DEBUG   SenderThread:400182 [sender.py:send_request():246] send_request: stop_status
+2022-05-09 23:13:28,121 DEBUG   HandlerThread:400182 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-09 23:13:28,122 DEBUG   SenderThread:400182 [sender.py:send():232] send: history
+2022-05-09 23:13:28,122 DEBUG   SenderThread:400182 [sender.py:send():232] send: summary
+2022-05-09 23:13:28,124 INFO    SenderThread:400182 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-09 23:13:28,803 INFO    Thread-7  :400182 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/ubuntu/alpha-zero-c4/wandb/run-20220509_231245-1nm3qjza/files/wandb-summary.json
+2022-05-09 23:13:34,383 DEBUG   HandlerThread:400182 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-09 23:13:34,383 DEBUG   SenderThread:400182 [sender.py:send_request():246] send_request: stop_status
+2022-05-09 23:13:46,526 DEBUG   SenderThread:400182 [sender.py:send():232] send: stats
+2022-05-09 23:13:49,680 DEBUG   HandlerThread:400182 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-09 23:13:49,680 DEBUG   SenderThread:400182 [sender.py:send_request():246] send_request: stop_status
+2022-05-09 23:14:04,980 DEBUG   HandlerThread:400182 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-09 23:14:04,981 DEBUG   SenderThread:400182 [sender.py:send_request():246] send_request: stop_status
+2022-05-09 23:14:10,044 DEBUG   HandlerThread:400182 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-09 23:14:10,046 DEBUG   SenderThread:400182 [sender.py:send():232] send: history
+2022-05-09 23:14:10,046 DEBUG   SenderThread:400182 [sender.py:send():232] send: summary
+2022-05-09 23:14:10,046 INFO    SenderThread:400182 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-09 23:14:10,818 INFO    Thread-7  :400182 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/ubuntu/alpha-zero-c4/wandb/run-20220509_231245-1nm3qjza/files/wandb-summary.json
+2022-05-09 23:14:16,604 DEBUG   SenderThread:400182 [sender.py:send():232] send: stats
+2022-05-09 23:14:20,292 DEBUG   HandlerThread:400182 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-09 23:14:20,292 DEBUG   SenderThread:400182 [sender.py:send_request():246] send_request: stop_status
