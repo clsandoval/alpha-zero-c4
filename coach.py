@@ -15,12 +15,12 @@ from players import NetworkPlayer, RandomPlayer
 class Coach():
     "Implements an environment where agents learn through self play"
     
-    def __init__(self,nnet, num_eps,board_shape = (5,5),win_length=4, num_sims = 50, iterations = 10):
+    def __init__(self,nnet, num_eps,board_shape = (5,5),win_length=4, num_sims = 25, iterations = 10):
         self.board_shape = board_shape
         self.win_length = win_length
         self.nnet=nnet 
         self.num_eps = num_eps
-        self.num_sims = 50
+        self.num_sims = 25
         self.examples = []
         self.iterations = iterations
 
@@ -58,8 +58,8 @@ class Coach():
                 ep_time = time.perf_counter()-start
                 wandb.log({'episode_time': ep_time})
             wandb.log({'examples_in_mem':len(self.examples)})
-            if len(self.examples) > 100000:
-                excess = len(self.examples) - 100000
+            if len(self.examples) > 200000:
+                excess = len(self.examples) - 200000
                 self.examples = self.examples[excess:]
             random.shuffle(self.examples)
             self.nnet.train(self.examples)
