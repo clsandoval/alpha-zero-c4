@@ -7,7 +7,7 @@ from connect4.game import Connect4
 
 class MCTS():
     
-    def __init__(self,game,nnet, num_sims = 50,cpuct = 1):
+    def __init__(self,game,nnet, num_sims = 50,cpuct =  3.0):
         self.num_sims = num_sims
         self.game = game
         self.nnet = nnet
@@ -18,7 +18,7 @@ class MCTS():
         self.P = {}
         self.cpuct = cpuct
 
-    def get_probs(self, temp = 1):
+    def get_probs(self, temp = 10):
         """
         Returns action probabilities of length (action_size)
         """

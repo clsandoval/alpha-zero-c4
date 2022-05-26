@@ -73,7 +73,7 @@ class Coach():
             random_player = RandomPlayer()
             current_player = NetworkPlayer(current_network,name="current network")
             best_player = NetworkPlayer(best_network,name="best network")
-            arena = Arena(best_player,current_player,self.board_shape[0],self.board_shape[1],self.win_length)
+            arena = Arena(best_player,current_player,self.board_shape[0],self.board_shape[1],self.win_length,log=True)
             res = arena.pit()
             if res: 
                 print("player 1 wins, retaining old network")
