@@ -30,8 +30,8 @@ class residual_block(keras.layers.Layer):
 
 def create_c4_model(board_shape, filters, residual_layers, kernel_size, action_size):
     board_input = layers.Input(shape=board_shape)
-    board_input = layers.Reshape((board_shape[0],board_shape[1],1))(board_input)
-    conv1 = layers.Conv2D(filters,kernel_size,padding = "same")(board_input)
+    board_input2 = layers.Reshape((board_shape[0],board_shape[1],1))(board_input)
+    conv1 = layers.Conv2D(filters,kernel_size,padding = "same")(board_input2)
     relu1 = layers.ReLU()(conv1)
     x = layers.BatchNormalization()(relu1)
     residual_blocks = [residual_block(kernel_size,filters) for i in range(residual_layers)]
@@ -61,7 +61,7 @@ def create_c4_model(board_shape, filters, residual_layers, kernel_size, action_s
 class nnet():
 
     def __init__(self, board_shape, residual_layers, filters,kernel_size, name = "current_model"):
-        print(board_shape)
+        print(board_shape,flush=True)
         self.net = create_c4_model(board_shape,filters,residual_layers,kernel_size,board_shape[1])
         self.board_shape =board_shape
         self.action_size = board_shape[1]
@@ -78,7 +78,8 @@ class nnet():
         examples_boards = np.array([i[0] for i in examples])
         examples_pi = np.array([i[1] for i in examples])
         examples_v = np.array([i[2] for i in examples])
-        self.net.fit(x = examples_boards,y = [examples_pi,examples_v],batch_size=64, epochs = 10,callbacks=WandbCallback())
+        history = self.net.fit(x = examples_boards,y = [examples_pi,examples_v],batch_size=64, epochs = 10)
+        wandb.log({'loss': history.history['loss']})
 
     def save_checkpoint(self):
         tf.keras.models.save_model(self.net,"models/{}".format(self.name))
