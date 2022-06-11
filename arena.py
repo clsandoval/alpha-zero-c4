@@ -47,8 +47,8 @@ class Arena():
             wandb.log({self.player1.name: self.wins[0], self.player2.name: self.wins[1]})
         print("Candidate: {} Current: {}".format(self.wins[0],self.wins[1]))
         if self.wins[0]/(self.battles) > .55:
-            return 0
-        return 1
+            return False
+        return True
         
 
 

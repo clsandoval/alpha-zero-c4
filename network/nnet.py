@@ -78,8 +78,7 @@ class nnet():
         examples_boards = np.array([i[0] for i in examples])
         examples_pi = np.array([i[1] for i in examples])
         examples_v = np.array([i[2] for i in examples])
-        history = self.net.fit(x = examples_boards,y = [examples_pi,examples_v],batch_size=64, epochs = 10)
-        wandb.log({'loss': history.history['loss']})
+        history = self.net.fit(x = examples_boards,y = [examples_pi,examples_v],batch_size=128, epochs = 100)
 
     def save_checkpoint(self):
         tf.keras.models.save_model(self.net,"models/{}".format(self.name))

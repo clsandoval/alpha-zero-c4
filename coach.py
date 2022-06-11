@@ -71,17 +71,18 @@ class Coach():
 
             print("Comparing Networks")
             random_player = RandomPlayer()
-            current_player = NetworkPlayer(current_network,name="current network")
+            current_player = NetworkPlayer(current_network,name="new network")
+            current_player_vs_random = NetworkPlayer(current_network,name="cvr network")
             best_player = NetworkPlayer(best_network,name="best network")
             arena = Arena(best_player,current_player,self.board_shape[0],self.board_shape[1],self.win_length,log=True)
             res = arena.pit()
-            if res: 
+            if res == False: #player 1 wins
                 print("player 1 wins, retaining old network")
                 best_player.nnet.save_checkpoint()
-            else:
+            else: #player 2 wins
                 print("player 2 wins, keeping new network")
                 self.nnet.save_checkpoint()
-            random_arena = Arena(random_player,current_player,self.board_shape[0],self.board_shape[1],self.win_length,log=True,battles=20)
+            random_arena = Arena(random_player,current_player_vs_random,self.board_shape[0],self.board_shape[1],self.win_length,log=True,battles=20)
             random_arena.pit()
 
             

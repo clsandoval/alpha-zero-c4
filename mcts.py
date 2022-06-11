@@ -7,7 +7,7 @@ from connect4.game import Connect4
 
 class MCTS():
     
-    def __init__(self,game,nnet, num_sims = 50,cpuct =  3.0):
+    def __init__(self,game,nnet, num_sims = 500,cpuct =  3.0):
         self.num_sims = num_sims
         self.game = game
         self.nnet = nnet
