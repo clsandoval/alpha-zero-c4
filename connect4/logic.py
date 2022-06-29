@@ -9,11 +9,13 @@ def get_row(pieces,column):
             return i  
     return -1
 
+
 def check_winner_straight(pieces,wlength=4):
     for i in range(len(pieces)):
         for j in range(len(pieces[0])-wlength+1):
             if all(pieces[i][j:j+wlength]): return True
     return False
+
 
 def check_winner_diagonal(pieces,wlength=4):
     for i in range(len(pieces) - wlength + 1):
@@ -25,8 +27,10 @@ def check_winner_diagonal(pieces,wlength=4):
                 return True
     return False
 
+
 def get_valid_actions(pieces):
     return pieces[0] == 0
+
 
 def get_winstate(pieces):
     #check if current player wins

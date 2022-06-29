@@ -23,10 +23,12 @@ class Coach():
         self.num_sims = 25
         self.examples = []
         self.iterations = iterations
+        self.temp_threshold = 15
 
-    def episode(self):
+    def episode(self,ep_num):
         self.game = Connect4(self.board_shape[0],self.board_shape[1],self.win_length)
         self.mcts = MCTS(self.game,self.nnet, num_sims = self.num_sims)
+        self.mcts.temp = int(ep_num<self.temp_threshold)
         states = []
         problist = []
         playerlist = []
@@ -53,7 +55,7 @@ class Coach():
             print("Starting Iteration")
             for i in (range(self.num_eps)):
                 start = time.perf_counter()
-                result = self.episode()
+                result = self.episode(i)
                 self.examples = self.examples + result
                 ep_time = time.perf_counter()-start
                 wandb.log({'episode_time': ep_time})
@@ -63,6 +65,7 @@ class Coach():
                 self.examples = self.examples[excess:]
             random.shuffle(self.examples)
             self.nnet.train(self.examples)
+            
             current_network = self.nnet
             best_network = self.nnet
             if os.path.exists("models/current_model"):
@@ -71,9 +74,10 @@ class Coach():
 
             print("Comparing Networks")
             random_player = RandomPlayer()
-            current_player = NetworkPlayer(current_network,name="new network")
-            current_player_vs_random = NetworkPlayer(current_network,name="cvr network")
-            best_player = NetworkPlayer(best_network,name="best network")
+            current_player = NetworkPlayer(current_network,name="candidate network")
+            current_player_vs_random = NetworkPlayer(current_network,name="cvr")
+            best_player = NetworkPlayer(best_network,name="old network")
+
             arena = Arena(best_player,current_player,self.board_shape[0],self.board_shape[1],self.win_length,log=True)
             res = arena.pit()
             if res == False: #player 1 wins

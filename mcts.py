@@ -7,7 +7,7 @@ from connect4.game import Connect4
 
 class MCTS():
     
-    def __init__(self,game,nnet, num_sims = 500,cpuct =  3.0):
+    def __init__(self,game,nnet, num_sims = 25,cpuct =  1.0,temp=1):
         self.num_sims = num_sims
         self.game = game
         self.nnet = nnet
@@ -17,8 +17,9 @@ class MCTS():
         self.N = {}
         self.P = {}
         self.cpuct = cpuct
+        self.temp = temp
 
-    def get_probs(self, temp = 10):
+    def get_probs(self):
         """
         Returns action probabilities of length (action_size)
         """
@@ -31,7 +32,15 @@ class MCTS():
 
         #return exponentiated counts of state actions visited
         counts = [self.Nsa[(state,a)] if (state,a) in self.Nsa else 0 for a in range(self.game.get_action_size())]
-        counts = [x ** (1./temp) for x in counts]
+        
+        if self.temp ==0:
+            best_as = np.array(np.argwhere(counts == np.max(counts))).flatten()
+            best_a = np.random.choice(best_as)
+            probs = [0] * len(counts)
+            probs[best_a] = 1
+            return probs 
+
+        counts = [x ** (1./self.temp) for x in counts]
         count_sum = float(sum(counts))
         probs = [x/count_sum for x in counts]
         return probs

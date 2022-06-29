@@ -17,9 +17,9 @@ class Arena():
         self.win_length = win_length
         self.wins=[0,0]
 
-    def battle(self,verbose):
+    def battle(self,verbose=False):
         """Pits the current and candidate networks against each other and returns the network with more wins"""
-        candidate_wins,best_wins = 0,0
+      
         for i in range(self.battles):
             game = Connect4(self.height,self.width,self.win_length)
             players = [self.player1,self.player2]
@@ -45,10 +45,10 @@ class Arena():
         self.battle(verbose)
         if self.log:
             wandb.log({self.player1.name: self.wins[0], self.player2.name: self.wins[1]})
-        print("Candidate: {} Current: {}".format(self.wins[0],self.wins[1]))
-        if self.wins[0]/(self.battles) > .55:
-            return False
-        return True
+        print("Current: {} Candidate: {}".format(self.wins[0],self.wins[1]))
+        if self.wins[1]/(self.battles) > .6:
+            return True
+        return False
         
 
 

@@ -36,7 +36,8 @@ class RandomPlayer():
 class HumanPlayer():
     """Human controlled player"""
 
-    def __init__(self):
+    def __init__(self, name):
+        self.name = "human player"
         pass 
 
     def init_game(self,game):
