@@ -18,12 +18,14 @@ class board():
         else:
             self.pieces = np.zeros((self.height, self.width),dtype=np.int)
     
-    def take_action(self,player,column):
-        row = get_row(self.pieces,column)
+    def take_action(self,player,column,pieces):
+        row = get_row(pieces,column)
         if row == -1:
             raise ValueError("no valid move at {} {}".format(row,column))
-        self.pieces[row][column] = player
-        self.pieces *=-1
+        pieces[row][column] = player
+        pieces *=-1
+        return pieces
+        
     
     def __str__(self):
         return str(self.pieces)

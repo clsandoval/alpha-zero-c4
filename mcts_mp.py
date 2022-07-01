@@ -1,6 +1,7 @@
 #%%
 import numpy as np
 import math
+import time,threading
 from network.nnet import nnet
 from connect4.board import board
 from connect4.game import Connect4
@@ -18,6 +19,27 @@ class MCTS():
         self.P = {}
         self.cpuct = cpuct
         self.temp = temp
+        #thread stuff
+        self.queue = threading.Queue()
+        self.cv = threading.Condition()
+        self.done_threads = 0
+        self.state_cache = {}
+
+
+    def network_thread(self):
+        """
+        Worker thread batching requests to network
+        """
+        if self.done_threads == self.num_sims:
+            return
+        samples = [i.get() for i in self.queue]
+        states = [i[0] for i in samples]
+        batch = np.array([i[1] for i in samples])
+        preds = self.nnet.net(batch)
+        for i in range(states):
+            self.cache[states[i]] = (preds[0][i],preds[1][i])
+        with self.cv:
+            self.cv.notify_all()
 
     def get_probs(self, state):
         """
@@ -63,10 +85,20 @@ class MCTS():
 
         #Expand if leaf node
         if state_str not in self.P:
-            pi, value = self.nnet.expand(state)
+            if state_str in self.state_cache:
+                pi, value = self.state_cache[state_str]
+                self.P[state_str]= pi * valid_actions
+                self.N[state_str] = 0
+                return -value
+            self.queue.put((state_str,state))
+            with self.cv:
+                while state_str not in self.state_cache:
+                    self.cv.wait()
+            pi, value = self.state_cache[state_str]
             self.P[state_str]= pi * valid_actions
             self.N[state_str] = 0
             return -value
+            
 
         #Evaluate edge
         max_q_u, best_a = -float("inf"), -1

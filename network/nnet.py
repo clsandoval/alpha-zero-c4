@@ -71,7 +71,7 @@ class nnet():
     
     def expand(self,board):
         b = np.expand_dims(board,0)
-        p, v = self.net.predict(b)
+        p, v = self.net(b)
         return p[0],v[0][0]
 
     def train(self,examples):

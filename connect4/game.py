@@ -20,21 +20,21 @@ class Connect4():
     def get_action_size(self):
         return self.board.width
 
-    def get_next_state(self,player,action):
-        return self.board.take_action(player,action)
+    def get_next_state(self,player,action,state):
+        return self.board.take_action(player,action,state)
 
     def get_symmetries(self):
         return self.board.pieces[::-1]
 
-    def get_valid_actions(self):
+    def get_valid_actions(self,pieces):
         #valid_moves = [i for i, x in enumerate(gva(self.board.pieces)) if x]
-        return gva(self.board.pieces)
+        return gva(pieces)
         
-    def get_winstate(self):
-        return gws(self.board.pieces)
+    def get_winstate(self,pieces):
+        return gws(pieces)
 
-    def display_self(self):
-        self.display(self.board.pieces)
+    def display_self(self,pieces):
+        self.display(pieces)
 
     def __str__(self):
         return self.board.__str__()

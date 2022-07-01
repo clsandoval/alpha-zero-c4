@@ -33,22 +33,24 @@ class Coach():
         problist = []
         playerlist = []
         player_ctr = 1
+        next_state = np.zeros((self.board_shape[0], self.board_shape[1]),dtype=np.int)
         while True:
-            probs = self.mcts.get_probs()
+            probs = self.mcts.get_probs(next_state)
             actions = np.arange(len(probs))
             action = np.random.choice(actions,p=probs)
-            self.game.get_next_state(1,action)
-            states.append(self.game.board.pieces)
-            states.append(np.fliplr(self.game.board.pieces))
+            states.append(next_state)
+            states.append(np.fliplr(next_state))
             problist.append(probs)
             problist.append(probs)
             playerlist.append(player_ctr)
             playerlist.append(player_ctr)
-            win, player = self.game.get_winstate()
-            valid_actions = self.game.get_valid_actions()
+            f_next_state = self.game.get_next_state(1,action,next_state)
+            win, player = self.game.get_winstate(f_next_state)
+            valid_actions = self.game.get_valid_actions(f_next_state)
             if win or not any(valid_actions):
                 return [(states[i],problist[i], playerlist[i] * -player) for i in range(len(states))]
             player_ctr *= -1
+            next_state = f_next_state
 
     def train(self):
         for it in (range(self.iterations)):
