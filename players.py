@@ -1,6 +1,6 @@
 import numpy as np 
 import sys 
-from mcts import MCTS  
+from mcts_mp import MCTS  
 
 
 
@@ -15,7 +15,7 @@ class NetworkPlayer():
         self.mcts = MCTS(self.game,self.nnet)
 
     def decision(self,board,valid_actions):
-        probs = self.mcts.get_probs()
+        probs = self.mcts.get_probs(board)
         actions = np.arange(len(probs))
         return np.random.choice(actions,p=probs)    
 

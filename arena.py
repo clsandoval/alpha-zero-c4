@@ -1,5 +1,4 @@
 import numpy as np 
-from mcts import MCTS
 from connect4.game import Connect4
 import wandb
 
@@ -22,16 +21,17 @@ class Arena():
       
         for i in range(self.battles):
             game = Connect4(self.height,self.width,self.win_length)
+            next_state = np.zeros((self.height, self.width),dtype=np.int)
             players = [self.player1,self.player2]
             for p in players:
                 p.init_game(game)
             player_ctr = 0
             while True:
-                valid_actions = game.get_valid_actions()
-                action = players[player_ctr].decision(game.board,valid_actions)
-                game.get_next_state(1,action)
-                valid_actions_2 = game.get_valid_actions()
-                win, player = game.get_winstate()
+                valid_actions = game.get_valid_actions(next_state)
+                action = players[player_ctr].decision(next_state,valid_actions)
+                valid_actions_2 = game.get_valid_actions(next_state)
+                new_next_state = game.get_next_state(1,action,next_state)
+                win, player = game.get_winstate(next_state)
                 if player == -1:
                     self.wins[player_ctr] += 1
                     if verbose:
@@ -40,6 +40,7 @@ class Arena():
                 if not any(valid_actions_2):
                     break
                 player_ctr = (player_ctr + 1) %2
+                next_state = new_next_state
 
     def pit(self,verbose = False):
         self.battle(verbose)

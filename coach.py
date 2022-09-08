@@ -5,7 +5,7 @@ import time
 import os
 import wandb
 from tqdm import tqdm
-from mcts import MCTS
+from mcts_mp import MCTS
 from network.nnet import nnet
 from connect4.game import Connect4
 from collections import deque
@@ -15,12 +15,12 @@ from players import NetworkPlayer, RandomPlayer
 class Coach():
     "Implements an environment where agents learn through self play"
     
-    def __init__(self,nnet, num_eps,board_shape = (5,5),win_length=4, num_sims = 25, iterations = 10):
+    def __init__(self,nnet, num_eps,board_shape = (5,5),win_length=4, num_sims = 100, iterations = 10):
         self.board_shape = board_shape
         self.win_length = win_length
         self.nnet=nnet 
         self.num_eps = num_eps
-        self.num_sims = 25
+        self.num_sims = num_sims
         self.examples = []
         self.iterations = iterations
         self.temp_threshold = 15
@@ -34,6 +34,7 @@ class Coach():
         playerlist = []
         player_ctr = 1
         next_state = np.zeros((self.board_shape[0], self.board_shape[1]),dtype=np.int)
+    
         while True:
             probs = self.mcts.get_probs(next_state)
             actions = np.arange(len(probs))
@@ -92,6 +93,7 @@ class Coach():
             random_arena.pit()
 
             
+
 
 # %%
 
