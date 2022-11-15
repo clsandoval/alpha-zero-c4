@@ -1,6 +1,6 @@
 #%%
 import numpy as np
-import math
+import math, time
 from network.nnet import nnet
 from connect4.board import board
 from connect4.game import Connect4
@@ -97,5 +97,12 @@ class MCTS():
     
                     
 # %%
-
+if __name__ == "__main__":              
+    cgame = Connect4(6,7,4)
+    net = nnet((6,7),4,128,3)
+    m = MCTS(cgame,net,num_sims=500)
+    next_state = np.zeros((6, 7),dtype=np.int)
+    start = time.perf_counter()
+    m.get_probs(next_state)
+    print(time.perf_counter()-start)
 # %%

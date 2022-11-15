@@ -47,3 +47,17 @@ class HumanPlayer():
         print(board.__str__())
         a = input()
         return int(a)
+
+class OneLookPlayer():
+    """one move lookahead agent for testing and benchmarks"""
+
+    def __init__(self, name):
+        self.name = "one move lookahead player"
+    
+    def init_game(self,game):
+        self.game = game
+
+    def decision(self,board,valid_actions):
+        #looks ahead one move to see if there are wins for either side, places piece there
+        
+        pass
